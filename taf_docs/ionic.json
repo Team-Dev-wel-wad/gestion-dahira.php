@@ -1,0 +1,16 @@
+[
+    {
+        "action": "add",
+        "les_langages": [
+            {
+                "name": "HTML",
+                "disabled": false,
+                "code": {
+                    "input": "<!-- ${une_colonne.Field} field avec un contrôle de validité --><div class=\"form-group col-sm-6\"><label>{{ une_colonne.Field }}</label><input class=\"form-control\" type=\"text\" formControlName=\"{{ une_colonne.Field }}\" placeholder=\"{{ une_colonne.Field }}\" [ngClass]=\"{ 'is-invalid': submitted && f[une_colonne.Field].errors }\"/><div *ngIf=\"submitted && f[une_colonne.Field].errors\" class=\"invalid-feedback\"><div *ngIf=\"f[une_colonne.Field].errors.required\">{{ une_colonne.Field }} est obligatoire</div></div></div>",
+                    "select": "<!-- ${une_colonne.Field} field avec un contrôle de validité --><div class=\"form-group col-sm-6\"><label>${une_colonne.Field}</label><select class=\"form-select\" formControlName=\"${une_colonne.Field}\" [ngClass]=\"{ 'is-invalid': submitted && f.${une_colonne.Field}.errors }\"><option *ngFor=\"let one_${une_colonne.table.TABLE_NAME} of forms_details.les_${une_colonne.table.TABLE_NAME}\" [value]=\"one_${une_colonne.table.TABLE_NAME}.${une_colonne.Field}\">{{one_${une_colonne.table.TABLE_NAME}.${une_colonne.Field}}}</option></select><div *ngIf=\"submitted && f.${une_colonne.Field}.errors\" class=\"invalid-feedback\"><div *ngIf=\"f.${une_colonne.Field}.errors.required\">${une_colonne.Field} est obligatoire</div></div></div>",
+                    "form": "<form [formGroup]=\"reactiveForm_add_${table.table}\" (ngSubmit)=\"onSubmit_add_${table.table}()\" #form_add_${table.table}=\"ngForm\" class=\"row\">${all_colonne}</form><!-- vous pouvez valider votre formulaire n'importe où --><div class=\"text-center m-2\"><button type=\"button\" class=\"btn btn-primary m-2\" [disabled]=\"loading_add_${table.table}\" (click)=\"form_add_${table.table}.ngSubmit.emit()\">{{loading_add_${table.table} ? 'En cours ...' : 'Valider'}}</button><button class=\"btn btn-secondary m-2\" type=\"reset\" (click)=\"onReset_add_${table.table}()\">Vider</button></div>"
+                }
+            }
+        ]
+    }
+]
