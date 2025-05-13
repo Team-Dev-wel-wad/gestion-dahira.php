@@ -26,10 +26,12 @@ try {
         echo json_encode($reponse);
         exit;
     }
-    $login = addslashes($params["login"]);
-    $pwd = addslashes($params["pwd"]);
+    $email = addslashes($params["email"]);
+    $mot_de_passe = addslashes($params["mot_de_passe"]);
 
-    $query = "select * from utilisateur where email ='$login' and password=md5('$pwd') ";
+     $query = "select * from users where email ='$email' and mot_de_passe=md5('$mot_de_passe') ";
+        // $query = "select * from users where email ='$login' and mot_de_passe='$pwd' ";
+
     $resultat = $taf_config->get_db()->query($query)->fetch(PDO::FETCH_ASSOC);
     if ($resultat) {
         $reponse["status"] = true;
