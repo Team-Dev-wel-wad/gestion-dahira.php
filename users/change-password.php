@@ -49,7 +49,7 @@ try {
 
     if (empty($params)) {
         echo json_encode(["status" => false, "erreur" => "Paramètres manquants"]);
-        exit;
+        die;
     }
 
     $conditionParams = json_decode($params["condition"] ?? "{}", true);
@@ -58,23 +58,21 @@ try {
 
     if (empty($conditionParams['id_users']) || empty($dataParams['mot_de_passe']) || empty($currentmot_de_passe)) {
         echo json_encode(["status" => false, "erreur" => "id_users, nouveau mot de passe ou mot de passe actuel manquant"]);
-        exit;
+        die;
     }
 
-    // Vérification du mot de passe actuel (md5)
+    // Vérification du mot de passe actuel avec md5
     $stmt = $table_query->get_db()->prepare("SELECT mot_de_passe FROM users WHERE id_users = :id_users");
     $stmt->execute(['id_users' => $conditionParams['id_users']]);
     $users = $stmt->fetch();
 
     if (!$users || md5($currentmot_de_passe) !== $users['mot_de_passe']) {
         echo json_encode(["status" => false, "erreur" => "Mot de passe actuel incorrect"]);
-        exit;
+        die;
     }
 
-    // Hash du nouveau mot de passe avec md5
-    $dataParams['mot_de_passe'] = md5($dataParams['mot_de_passe']);
-
-    // Générer requête UPDATE
+    // Pas de hashage pour le nouveau mot de passe, utiliser tel quel
+    // Générer une requête UPDATE
     $condition = $table_query->dynamicCondition($conditionParams, '=');
     $query = $table_query->dynamicUpdate($dataParams, $condition);
 
@@ -85,7 +83,7 @@ try {
         $stmt->bindValue(":$key", $value);
     }
 
-    // Bind des conditions
+    // Lier les conditions
     foreach ($conditionParams as $key => $value) {
         $stmt->bindValue(":cond_$key", $value);
     }
@@ -95,7 +93,6 @@ try {
     } else {
         echo json_encode(["status" => false, "erreur" => "Erreur lors de la mise à jour"]);
     }
-
 } catch (\Throwable $th) {
     echo json_encode(["status" => false, "erreur" => $th->getMessage()]);
 }
