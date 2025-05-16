@@ -18,7 +18,9 @@ try {
     }
 
     $reponse["data"]["les_commissions"] = $taf_config->get_db()->query("select * from commission")->fetchAll(PDO::FETCH_ASSOC);
+    $reponse["data"]["les_dahiras"] = $taf_config->get_db()->query("select * from dahira")->fetchAll(PDO::FETCH_ASSOC);
 
+    $reponse["data"]["les_userss"] = $taf_config->get_db()->query("select * from users")->fetchAll(PDO::FETCH_ASSOC);
 
     $reponse["status"] = true;
 
