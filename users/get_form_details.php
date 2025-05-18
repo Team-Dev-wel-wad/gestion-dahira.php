@@ -18,7 +18,7 @@ try {
     }
 
     $reponse["data"]["les_privileges"] = $taf_config->get_db()->query("select * from privilege")->fetchAll(PDO::FETCH_ASSOC);
-    $reponse["data"]["les_dahiras"] = $taf_config->get_db()->query("select * from dahira")->fetchAll(PDO::FETCH_ASSOC);
+    $reponse["data"]["les_dahiras"] = $taf_config->get_db()->query("select * from dahira WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
 
 
     $reponse["status"] = true;

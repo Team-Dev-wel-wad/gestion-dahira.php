@@ -23,7 +23,7 @@ try {
 
     $condition=$table_query->dynamicCondition($params,"=");
     // $reponse["condition"]=$condition;
-    $query="select *from $table_name ".$condition;
+    $query="select t.*,d.nom_dahira from $table_name t left join dahira d on d.id_dahira=t.id_dahira".$condition;
     $reponse["data"] = $taf_config->get_db()->query($query)->fetchAll(PDO::FETCH_ASSOC);
     $reponse["status"] = true;
 

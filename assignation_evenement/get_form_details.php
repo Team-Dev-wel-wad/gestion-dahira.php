@@ -17,9 +17,9 @@ try {
         die;
     }
 
-    $reponse["data"]["les_userss"] = $taf_config->get_db()->query("select * from users")->fetchAll(PDO::FETCH_ASSOC);
-$reponse["data"]["les_evenements"] = $taf_config->get_db()->query("select * from evenement")->fetchAll(PDO::FETCH_ASSOC);
-    $reponse["data"]["les_dahiras"] = $taf_config->get_db()->query("select * from dahira")->fetchAll(PDO::FETCH_ASSOC);
+    $reponse["data"]["les_userss"] = $taf_config->get_db()->query("select * from users WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
+$reponse["data"]["les_evenements"] = $taf_config->get_db()->query("select * from evenement WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
+    $reponse["data"]["les_dahiras"] = $taf_config->get_db()->query("select * from dahira WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
 
    
 
