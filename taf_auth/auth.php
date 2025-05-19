@@ -30,7 +30,6 @@ try {
     $mot_de_passe = addslashes($params["mot_de_passe"]);
 
      $query = "select * from users where email ='$email' and mot_de_passe=md5('$mot_de_passe') ";
-        // $query = "select * from users where email ='$login' and mot_de_passe='$pwd' ";
 
     $resultat = $taf_config->get_db()->query($query)->fetch(PDO::FETCH_ASSOC);
     if ($resultat) {
