@@ -17,8 +17,10 @@ try {
         die;
     }
 
-$reponse["data"]["les_userss"] = $taf_config->get_db()->query("SELECT * FROM users WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
-$reponse["data"]["les_dahiras"] = $taf_config->get_db()->query("SELECT * FROM dahira WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
+    $reponse["data"]["les_userss"] = $taf_config->get_db()->query("select * from users WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
+$reponse["data"]["les_dahiras"] = $taf_config->get_db()->query("select * from dahira WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
+$reponse["data"]["les_hotes"] = $taf_config->get_db()->query("select * from hote WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
+
 
     $reponse["status"] = true;
 

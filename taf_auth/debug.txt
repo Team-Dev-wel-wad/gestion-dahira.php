@@ -1,0 +1,24 @@
+Array
+(
+    [email] => wade@gmail.com
+    [mot_de_passe_clair] => 123456
+    [mot_de_passe_md5] => e10adc3949ba59abbe56e057f20f883e
+    [user_existe] => Array
+        (
+            [id_users] => 2
+            [id_dahira] => 1
+            [nom_users] => NBHB
+            [sexe] => H
+            [date_naissance] => 0000-00-00
+            [adresse] => FF
+            [telephone] => 785208034
+            [profession] => hh
+            [antecedents] => ff
+            [email] => wade@gmail.com
+            [mot_de_passe] => 14e1b600b1fd579f47433b88e8d85291
+            [date_inscription] => 2025-05-13 16:13:41
+            [id_privilege] => 1
+        )
+
+    [resultat_requete] => 
+)

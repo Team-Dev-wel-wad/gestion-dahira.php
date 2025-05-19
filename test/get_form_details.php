@@ -17,8 +17,8 @@ try {
         die;
     }
 
-$reponse["data"]["les_userss"] = $taf_config->get_db()->query("SELECT * FROM users WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
-$reponse["data"]["les_dahiras"] = $taf_config->get_db()->query("SELECT * FROM dahira WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
+    
+
 
     $reponse["status"] = true;
 

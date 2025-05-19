@@ -1,9 +1,11 @@
 <?php
 
 use Taf\TafAuth;
+use Taf\TableQuery;
 
 try {
     require './config.php';
+    require '../TableQuery.php';
     require '../taf_auth/TafAuth.php';
     $taf_auth = new TafAuth();
     /* 
@@ -11,15 +13,18 @@ try {
         contient tous les parametres envoyés par la methode POST
      */
     // toutes les actions nécéssitent une authentification
-    $auth_reponse = $taf_auth->check_auth();
-    if ($auth_reponse["status"] == false && count($params) == 0) {
+    $auth_reponse=$taf_auth->check_auth();
+    if ($auth_reponse["status"] == false && count($params)==0) {
         echo json_encode($auth_reponse);
         die;
     }
+    
+    $table_query=new TableQuery($table_name);
 
-$reponse["data"]["les_userss"] = $taf_config->get_db()->query("SELECT * FROM users WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
-$reponse["data"]["les_dahiras"] = $taf_config->get_db()->query("SELECT * FROM dahira WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
-
+    $condition=$table_query->dynamicCondition($params,"=");
+    // $reponse["condition"]=$condition;
+    $query="select t.*,d.nom_dahira from $table_name t left join dahira d on d.id_dahira=t.id_dahira".$condition;
+    $reponse["data"] = $taf_config->get_db()->query($query)->fetchAll(PDO::FETCH_ASSOC);
     $reponse["status"] = true;
 
     echo json_encode($reponse);
@@ -29,3 +34,5 @@ $reponse["data"]["les_dahiras"] = $taf_config->get_db()->query("SELECT * FROM da
 
     echo json_encode($reponse);
 }
+
+?>
