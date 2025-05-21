@@ -24,30 +24,7 @@ try {
     $condition=$table_query->dynamicCondition($params,"=");
     // $reponse["condition"]=$condition;
     $query="select *from $table_name ".$condition;
-    $reponse["data"] = $taf_config->get_db()->query(
-        "
-       SELECT 
-    a.*, 
-    u.*, 
-    e.*, 
-    c.*,
-    (c.montant_categorie - a.montant_verser) AS montant_restant, 
-    ROUND((a.montant_verser / c.montant_categorie) * 100, 2) AS pourcentage_verse 
-FROM 
-    assignation_evenement a 
-JOIN 
-    users u ON a.id_users = u.id_users 
-JOIN 
-    evenement e ON a.id_evenement = e.id_evenement
-JOIN 
-    categorie_assignation c ON a.id_categorie_assignation = c.id_categorie_assignation
-ORDER BY 
-    c.id_categorie_assignation ASC, 
-    pourcentage_verse DESC;
-
-
-        "
-        )->fetchAll(PDO::FETCH_ASSOC);
+    $reponse["data"] = $taf_config->get_db()->query($query)->fetchAll(PDO::FETCH_ASSOC);
     $reponse["status"] = true;
 
     echo json_encode($reponse);

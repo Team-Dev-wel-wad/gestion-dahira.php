@@ -16,10 +16,12 @@ try {
         echo json_encode($auth_reponse);
         die;
     }
-
-    $reponse["data"]["les_userss"] = $taf_config->get_db()->query("select * from users WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
+$reponse["data"]["les_userss"] = $taf_config->get_db()->query("select * from users WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
 $reponse["data"]["les_evenements"] = $taf_config->get_db()->query("select * from evenement WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
-    $reponse["data"]["les_dahiras"] = $taf_config->get_db()->query("select * from dahira WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
+$reponse["data"]["les_dahiras"] = $taf_config->get_db()->query("select * from dahira WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
+$reponse["data"]["les_categorie_assignations"] = $taf_config->get_db()->query("select * from categorie_assignation WHERE id_dahira = " . $params['id_dahira'])->fetchAll(PDO::FETCH_ASSOC);
+
+
 
    
 
