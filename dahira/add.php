@@ -33,13 +33,13 @@ try {
         'adresse' => isset($params['adresse']) ? $params['adresse'] : null,
         'lieu' => isset($params['lieu']) ? $params['lieu'] : null,
         'statut' => isset($params['statut']) ? $params['statut'] : null,
-        'description' => isset($params['description']) ? $params['description'] : null
+        'description' => isset($params['description']) ? $params['description'] : null,
 
-        // 'date_creation' => isset($params['date_creation']) && $params['date_creation'] ? $params['date_creation'] : null
+        'date_creation' => isset($params['date_creation']) && $params['date_creation'] ? $params['date_creation'] : null
     ];
 
     // Validate required fields
-    $required_fields = ['nom_dahira', 'adresse', 'lieu', 'statut', 'description'];
+    $required_fields = ['nom_dahira', 'adresse', 'lieu', 'statut', 'description', 'date_creation'];
     foreach ($required_fields as $field) {
         if (empty($data[$field])) {
             $reponse["status"] = false;
