@@ -26,7 +26,7 @@ try {
     $query="select *from $table_name ".$condition;
     $reponse["data"] = $taf_config->get_db()->query(
         "
-       SELECT 
+     SELECT 
     a.*, 
     u.*, 
     e.*, 
@@ -42,8 +42,10 @@ JOIN
 JOIN 
     categorie_assignation c ON a.id_categorie_assignation = c.id_categorie_assignation
 ORDER BY 
-    c.id_categorie_assignation ASC, 
-    pourcentage_verse DESC;
+    e.date_evenement DESC,               -- Événement le plus récent en premier
+    c.id_categorie_assignation ASC,      -- Groupement logique par catégorie
+    pourcentage_verse DESC;              -- Tri par pourcentage décroissant
+
 
 
         "
