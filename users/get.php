@@ -23,7 +23,13 @@ try {
 
     $condition=$table_query->dynamicCondition($params,"=");
     // $reponse["condition"]=$condition;
-    $query="select *from $table_name ".$condition;
+    // $query="select u*,p.* from $table_name ".$condition;
+$query = "SELECT u.*, p.* 
+          FROM users u 
+          JOIN privilege p ON u.id_privilege = p.id_privilege 
+          WHERE u.statut = 'actif' 
+          ORDER BY u.nom_users ASC";
+
     $reponse["data"] = $taf_config->get_db()->query($query)->fetchAll(PDO::FETCH_ASSOC);
     $reponse["status"] = true;
 

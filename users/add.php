@@ -14,6 +14,12 @@ try {
         echo json_encode($auth_reponse);
         die;
     }
+    // Valeur par défaut du mot de passe si non fourni
+    if (!isset($params['mot_de_passe']) || empty($params['mot_de_passe'])) {
+        $params['mot_de_passe'] = md5(123); // ou password_hash('1234', PASSWORD_DEFAULT)
+    } else {
+        $params['mot_de_passe'] = md5($params['mot_de_passe']); // hash toujours
+    }
 
     $table_query = new TableQuery($table_name);
     /* 
