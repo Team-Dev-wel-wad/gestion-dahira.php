@@ -16,7 +16,7 @@ try {
     }
     // Valeur par défaut du mot de passe si non fourni
     if (!isset($params['mot_de_passe']) || empty($params['mot_de_passe'])) {
-        $params['mot_de_passe'] = md5(123); // ou password_hash('1234', PASSWORD_DEFAULT)
+        $params['mot_de_passe'] = md5(1234); // ou password_hash('1234', PASSWORD_DEFAULT)
     } else {
         $params['mot_de_passe'] = md5($params['mot_de_passe']); // hash toujours
     }
