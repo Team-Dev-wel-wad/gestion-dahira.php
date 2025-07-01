@@ -50,7 +50,7 @@ try {
         'mot_de_passe' => $params['mot_de_passe'], // Déjà hashé
         'id_privilege' => isset($params['id_privilege']) ? $params['id_privilege'] : null,
         'id_dahira' => isset($params['id_dahira']) ? $params['id_dahira'] : null,
-        'date_enregistrement' => date("Y-m-d H:i:s") // Ajout de la date courante
+        'date_inscription' => date("Y-m-d H:i:s") // Ajout de la date courante
     ];
 
     // Valider les champs requis
