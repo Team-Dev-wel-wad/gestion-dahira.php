@@ -41,7 +41,7 @@ try {
         'mot_de_passe' => $params['mot_de_passe'],
         'id_privilege' => $params['id_privilege'] ?? null,
         'id_dahira' => $params['id_dahira'] ?? null,
-        'date_enregistrement' => date("Y-m-d H:i:s")
+        'date_inscription' => date("Y-m-d H:i:s")
     ];
 
     // Validation des champs obligatoires
