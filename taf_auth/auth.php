@@ -26,17 +26,32 @@ try {
         echo json_encode($reponse);
         exit;
     }
-    $email = addslashes($params["email"]);
-    $mot_de_passe = addslashes($params["mot_de_passe"]);
+    // $email = addslashes($params["email"]);
+    // $mot_de_passe = addslashes($params["mot_de_passe"]);
 
-     $query = "select * from users where email ='$email' and mot_de_passe=md5('$mot_de_passe') ";
+    //  $query = "select * from users where email ='$email' and mot_de_passe=md5('$mot_de_passe') ";
 
-    $resultat = $taf_config->get_db()->query($query)->fetch(PDO::FETCH_ASSOC);
-    if ($resultat) {
+    // $resultat = $taf_config->get_db()->query($query)->fetch(PDO::FETCH_ASSOC);
+    // if ($resultat) {
+    //     $reponse["status"] = true;
+    //     $reponse["data"] = $taf_auth->get_token($resultat);
+    // } else {
+    //     $reponse["status"] = false;
+    // }
+    $email = $params["email"];
+    $mot_de_passe = $params["mot_de_passe"];
+
+    $stmt = $taf_config->get_db()->prepare("SELECT * FROM users WHERE email = :email");
+    $stmt->bindParam(':email', $email);
+    $stmt->execute();
+    $resultat = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($resultat && password_verify($mot_de_passe, $resultat['mot_de_passe'])) {
         $reponse["status"] = true;
         $reponse["data"] = $taf_auth->get_token($resultat);
     } else {
         $reponse["status"] = false;
+        $reponse["erreur"] = "Identifiants invalides";
     }
 
     echo json_encode($reponse);
