@@ -27,9 +27,14 @@ try {
     }
 
     // Hasher le mot de passe
+    // $params['mot_de_passe'] = isset($params['mot_de_passe']) && !empty($params['mot_de_passe'])
+    //     ? password_hash($params['mot_de_passe'], PASSWORD_DEFAULT)
+    //     : password_hash('1234', PASSWORD_DEFAULT);
+    // Hasher le mot de passe en md5
     $params['mot_de_passe'] = isset($params['mot_de_passe']) && !empty($params['mot_de_passe'])
-        ? password_hash($params['mot_de_passe'], PASSWORD_DEFAULT)
-        : password_hash('1234', PASSWORD_DEFAULT);
+    ? md5($params['mot_de_passe'])
+    : md5('1234');
+
 
     // Nettoyer téléphone
     $params['telephone'] = preg_replace('/\D/', '', $params['telephone'] ?? '');
