@@ -29,21 +29,38 @@ try {
     //           JOIN privilege p ON u.id_privilege = p.id_privilege 
     //           WHERE u.statut = 'actif' 
     //           ORDER BY u.nom_users ASC";
-    $query = "SELECT 
-  u.*, 
-  p.*, 
-  g.type_genre, 
-  c.date_delivrance, 
-  c.date_expiration
-FROM users u
-JOIN privilege p ON u.id_privilege = p.id_privilege
-LEFT JOIN genre g ON u.id_genre = g.id_genre
-LEFT JOIN carte_membre c ON u.id_users = c.id_users
-LEFT JOIN dahira d ON u.id_dahira = d.id_dahira
+//     $query = "SELECT 
+//   u.*, 
+//   p.*, 
+//   g.type_genre, 
+//   c.date_delivrance, 
+//   c.date_expiration
+// FROM users u
+// JOIN privilege p ON u.id_privilege = p.id_privilege
+// LEFT JOIN genre g ON u.id_genre = g.id_genre
+// LEFT JOIN carte_membre c ON u.id_users = c.id_users
+// LEFT JOIN dahira d ON u.id_dahira = d.id_dahira
 
-WHERE u.statut = 'actif'
-ORDER BY u.nom_users ASC;
-";
+// WHERE u.statut = 'actif'
+// ORDER BY u.nom_users ASC;
+// ";
+    $query ="SELECT 
+            u.*, 
+            p.*, 
+            g.type_genre, 
+            c.date_delivrance, 
+            c.date_expiration,
+            d.image_dahira,
+            d.nom_dahira
+
+            FROM users u
+            JOIN privilege p ON u.id_privilege = p.id_privilege
+            LEFT JOIN genre g ON u.id_genre = g.id_genre
+            LEFT JOIN carte_membre c ON u.id_users = c.id_users
+            LEFT JOIN dahira d ON u.id_dahira = d.id_dahira
+
+            WHERE u.statut = 'actif'
+            ORDER BY u.nom_users ASC;";
 
     $reponse["data"] = $taf_config->get_db()->query($query)->fetchAll(PDO::FETCH_ASSOC);
     $reponse["status"] = true;
